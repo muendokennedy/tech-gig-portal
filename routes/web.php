@@ -21,10 +21,9 @@ Route::get('/', function () {
         'listings' => Listing::all(),
     ]);
 });
-Route::get('/listing/{id}', function ($id) {
-    return view('listing', [
-        'heading' => 'Listings',
-        'listing' => Listing::find($id),
-    ]);
+Route::get('/listing/{listing}', function (Listing $listing) {
+    return view('listing', compact('listing'));
 });
+
+
 
