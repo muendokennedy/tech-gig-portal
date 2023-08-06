@@ -14,9 +14,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+// Show all the listings
 Route::get('/', [ListingController::class, 'index']);
-Route::get('/listing/{listing}', [ListingController::class, 'show']);
+// Create a listing
+Route::get('/listings/create', [ListingController::class, 'create']);
+// Store a listing to the DB
+Route::post('/listings', [ListingController::class, 'store']);
+// Show a particular lising
+Route::get('/listings/{listing}', [ListingController::class, 'show']);
 
 
 
