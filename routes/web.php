@@ -15,13 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Show all the listings
-Route::get('/', [ListingController::class, 'index']);
-// Create a listing
-Route::get('/listings/create', [ListingController::class, 'create']);
-// Store a listing to the DB
-Route::post('/listings', [ListingController::class, 'store']);
+Route::get('/', [ListingController::class, 'index'])->name('listings.index');
 // Show a particular lising
-Route::get('/listings/{listing}', [ListingController::class, 'show']);
+Route::get('/listings/{listing}/show', [ListingController::class, 'show'])->name('listing.show');
+// Create a listing
+Route::get('/listings/create', [ListingController::class, 'create'])->name('listing.create');
+// Store a listing to the DB
+Route::post('/listings/store', [ListingController::class, 'store'])->name('listing.store');
+// Edit a single listing
+Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->name('listing.edit');
+// Update a single listing to the database
+Route::post('/listings/{listing}/update', [ListingController::class, 'update'])->name('listing.update');
+// Delete a single listing
+Route::post('/listings/{listing}/delete', [ListingController::class, 'destroy'])->name('listing.destroy');
 
 
 

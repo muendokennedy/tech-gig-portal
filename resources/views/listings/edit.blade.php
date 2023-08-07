@@ -1,17 +1,18 @@
 <x-layout>
   <x-card class="p-10 max-w-lg mx-auto mt-24">
     <header class="text-center">
-      <h2 class="text-2xl font-bold uppercase mb-1">Create a Gig</h2>
-      <p class="mb-4">Post a gig to find a developer</p>
+      <h2 class="text-2xl font-bold uppercase mb-1">Edit the Gig</h2>
+      <p class="mb-4">Edit this gig to find a developer</p>
     </header>
 
-    <form method="POST" action="/listings" enctype="multipart/form-data">
+    <form method="POST" action="{{route('listing.update', $listing->id)}}" enctype="multipart/form-data">
       @csrf
+      @method('post')
       <div class="mb-6">
         <label for="company" class="inline-block text-lg mb-2">Company Name</label>
         <input type="text" class="border border-gray-200 rounded p-2 w-full @error('company')
         border-rose-600 border-2
-        @enderror" name="company" value="{{old('company')}}"/>
+        @enderror" name="company" value="{{$listing->company}}"/>
         @error('company')
         <p class="text-red-500 text-base mt-1 font-medium">{{$message}}</p>
         @enderror
@@ -22,7 +23,7 @@
         @error('title')
         border-rose-600 border-2
         @enderror" name="title"
-          placeholder="Example: Senior Laravel Developer" value="{{old('title')}}"/>
+          placeholder="Example: Senior Laravel Developer" value="{{$listing->title}}"/>
           @error('title')
           <p class="text-red-500 text-base mt-1 font-medium">{{$message}}</p>
           @enderror
@@ -33,7 +34,7 @@
         @error('location')
         border-rose-600 border-2
         @enderror" name="location"
-          placeholder="Example: Remote, Boston MA, etc" value="{{old('location')}}"/>
+          placeholder="Example: Remote, Boston MA, etc" value="{{$listing->location}}"/>
           @error('location')
           <p class="text-red-500 text-base mt-1 font-medium">{{$message}}</p>
           @enderror
@@ -45,7 +46,7 @@
         <input type="text" class="border border-gray-200 rounded p-2 w-full
         @error('email')
         border-rose-600 border-2
-        @enderror" name="email" value="{{old('email')}}"/>
+        @enderror" name="email" value="{{$listing->email}}"/>
         @error('email')
         <p class="text-red-500 text-base mt-1 font-medium">{{$message}}</p>
         @enderror
@@ -57,7 +58,7 @@
         <input type="text" class="border border-gray-200 rounded p-2 w-full
         @error('website')
         border-rose-600 border-2
-        @enderror" name="website" value="{{old('website')}}"/>
+        @enderror" name="website" value="{{$listing->website}}"/>
         @error('website')
         <p class="text-red-500 text-base mt-1 font-medium">{{$message}}</p>
         @enderror
@@ -70,7 +71,7 @@
         @error('tags')
         border-rose-600 border-2
         @enderror" name="tags"
-          placeholder="Example: Laravel, Backend, Postgres, etc" value="{{old('tags')}}" />
+          placeholder="Example: Laravel, Backend, Postgres, etc" value="{{$listing->tags}}" />
           @error('tags')
           <p class="text-red-500 text-base mt-1 font-medium">{{$message}}</p>
           @enderror
@@ -82,7 +83,7 @@
         <input type="file" class="border border-gray-200 rounded p-2 w-full
         @error('logo')
         border-rose-600 border-2
-        @enderror" name="logo" value="{{old('logo')}}" />
+        @enderror" name="logo" value="{{$listing->logo}}" />
         @error('logo')
         <p class="text-red-500 text-base mt-1 font-medium">{{$message}}</p>
         @enderror
@@ -95,16 +96,16 @@
         @error('description')
         border-rose-600 border-2
         @enderror" name="description" rows="10"
-          placeholder="Include tasks, requirements, salary, etc">{{old('description')}}</textarea>
+          placeholder="Include tasks, requirements, salary, etc">{{$listing->description}}</textarea>
           @error('description')
           <p class="text-red-500 text-base mt-1 font-medium">{{$message}}</p>
           @enderror
       </div>
       <div class="mb-6">
         <button class="bg-laravel text-white rounded py-2 px-4 hover:bg-black">
-          Create Gig
+          Edit this Gig
         </button>
-        <a href="{{ route('listings.index') }}" class="text-black ml-4"> Back </a>
+        <a href="{{ route('listing.show', $listing->id) }}" class="text-black ml-4"> Back </a>
       </div>
     </form>
   </x-card>

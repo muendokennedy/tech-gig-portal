@@ -25,6 +25,11 @@ class ListingController extends Controller
     {
         return view('listings.create');
     }
+    //Render a form to edit a single listing
+    public function edit(Listing $listing)
+    {
+        return view('listings.edit', compact('listing'));
+    }
     // Store a new listing to the database
     public function store(StoreListingRequest $request)
     {
@@ -39,6 +44,6 @@ class ListingController extends Controller
         Listing::create($validatedFormFields);
 
 
-        return redirect('/')->with('message', 'The listing has been created successfully');
+        return redirect(route('listings.index'))->with('message', 'The listing has been created successfully');
     }
 }
