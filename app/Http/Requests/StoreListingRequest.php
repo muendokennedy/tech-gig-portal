@@ -28,6 +28,7 @@ class StoreListingRequest extends FormRequest
                 'website' => 'required',
                 'email' => 'required | email',
                 'tags' => 'required',
+                'logo' => 'nullable | file | mimes:jpg, jpeg, png',
                 'description' => 'required'
         ];
     }

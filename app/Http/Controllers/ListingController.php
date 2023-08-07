@@ -12,7 +12,7 @@ class ListingController extends Controller
     // Show all listings
     public function index()
     {
-        $listings = Listing::latest()->filter(request(['tag', 'search']))->get();
+        $listings = Listing::latest()->filter(request(['tag', 'search']))->paginate(6);
         return view('listings.index', compact('listings'));
     }
     // Show a single listing
@@ -30,8 +30,14 @@ class ListingController extends Controller
     {
         $validatedFormFields = $request->validated();
 
+        // if there is a logo submitted insert it into the database
+
+        if($request->hasFile('logo')){
+            $validatedFormFields['logo'] = $request->file('logo')->store('logos', 'public');
+        }
         // Insert into the database
         Listing::create($validatedFormFields);
+
 
         return redirect('/')->with('message', 'The listing has been created successfully');
     }
