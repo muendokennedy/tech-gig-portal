@@ -25,9 +25,11 @@ Route::post('/listings/store', [ListingController::class, 'store'])->name('listi
 // Edit a single listing
 Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->name('listing.edit');
 // Update a single listing to the database
-Route::post('/listings/{listing}/update', [ListingController::class, 'update'])->name('listing.update');
+Route::put('/listings/{listing}/update', [ListingController::class, 'update'])->name('listing.update');
 // Delete a single listing
-Route::post('/listings/{listing}/delete', [ListingController::class, 'destroy'])->name('listing.destroy');
+Route::delete('/listings/{listing}/delete', [ListingController::class, 'destroy'])->name('listing.destroy');
+
+require_once __DIR__ . '/auth.php';
 
 
 

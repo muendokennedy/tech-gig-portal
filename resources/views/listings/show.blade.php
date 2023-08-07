@@ -39,6 +39,8 @@
           <i class="fa-solid fa-pencil"></i> Edit
         </a>
         <form method="POST" action="{{ route('listing.destroy', $listing->id) }}">
+            @csrf
+            @method('DELETE')
           <button class="text-red-500"><i class="fa-solid fa-trash"></i> Delete</button>
         </form>
       </div>
