@@ -48,7 +48,7 @@ class UserController extends Controller
             return redirect(route('listings.index'))->with('message', 'You logged in successfully');
         }
 
-        return back()->withErrors(['email' => 'Invalid log in credentials']);
+        return back()->withErrors(['email' => 'Invalid log in credentials'])->onlyInput('email');
 
     }
     // Logout the user from the current session

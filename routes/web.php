@@ -19,7 +19,7 @@ Route::get('/', [ListingController::class, 'index'])->name('listings.index');
 // Show a particular lising
 Route::get('/listings/{listing}/show', [ListingController::class, 'show'])->name('listing.show');
 // Create a listing
-Route::get('/listings/create', [ListingController::class, 'create'])->name('listing.create');
+Route::get('/listings/create', [ListingController::class, 'create'])->name('listing.create')->middleware('auth');
 // Store a listing to the DB
 Route::post('/listings/store', [ListingController::class, 'store'])->name('listing.store');
 // Edit a single listing
