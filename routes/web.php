@@ -28,6 +28,8 @@ Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->name
 Route::put('/listings/{listing}/update', [ListingController::class, 'update'])->name('listing.update');
 // Delete a single listing
 Route::delete('/listings/{listing}/delete', [ListingController::class, 'destroy'])->name('listing.destroy');
+// Logged in user can manage listings
+Route::get('/listings/manage', [ListingController::class, 'manage'])->name('listings.manage');
 
 require_once __DIR__ . '/auth.php';
 

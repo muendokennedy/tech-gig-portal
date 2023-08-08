@@ -71,4 +71,10 @@ class ListingController extends Controller
 
         return redirect(route('listings.index'))->with('message', 'The listing has been deleted successfully');
     }
+
+    // Manage listing for the logged in user
+    public function manage()
+    {
+
+    }
 }
