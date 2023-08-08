@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Listing extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'title',
         'logo',
         'tags',
@@ -30,5 +32,11 @@ class Listing extends Model
             ->orWhere('description', 'like', '%' . request('search') . '%')
             ->orWhere('tags', 'like', '%' . request('search') . '%');
         }
+    }
+
+    // A relationship that shows that the user has many lists
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

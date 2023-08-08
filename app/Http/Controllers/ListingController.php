@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreListingRequest;
-use App\Http\Requests\UpdateListingRequest;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreListingRequest;
+use App\Http\Requests\UpdateListingRequest;
 
 class ListingController extends Controller
 {
@@ -36,10 +37,19 @@ class ListingController extends Controller
     {
         $validatedFormFields = $request->validated();
 
-        // if there is a log update as well
+
+        // Make sure the logged in user is the owner
+        //This is not necessary though because the update route is protected by the auth middleware
+
+        if($listing->user_id != auth()->id()){
+            abort(403, 'Unauthorized action');
+        }
+
+        // if there is a logo update as well
 
         if($request->hasFile('logo')){
-            $validatedFormFields['logo'] = $request->file('logo')->store('logo', 'public');
+            $validatedFormFields['logo'] = $request->file('logo')->store('logos', 'public');
+            Storage::disk('public')->delete($listing->logo);
         }
 
         // Then update
@@ -57,6 +67,8 @@ class ListingController extends Controller
         if($request->hasFile('logo')){
             $validatedFormFields['logo'] = $request->file('logo')->store('logos', 'public');
         }
+
+        $validatedFormFields['user_id'] = auth()->id();
         // Insert into the database
         Listing::create($validatedFormFields);
 
@@ -75,6 +87,8 @@ class ListingController extends Controller
     // Manage listing for the logged in user
     public function manage()
     {
+        $listings = auth()->user()->listings()->get();
 
+        return view('listings.manage', compact('listings'));
     }
 }

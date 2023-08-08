@@ -34,16 +34,6 @@
           </div>
         </div>
       </x-card>
-      <div class="bg-gray-50 border border-gray-200 rounded p-6 mt-4 p-2 flex space-x-6">
-        <a href="{{ route('listing.edit', $listing->id)}}">
-          <i class="fa-solid fa-pencil"></i> Edit
-        </a>
-        <form method="POST" action="{{ route('listing.destroy', $listing->id) }}">
-            @csrf
-            @method('DELETE')
-          <button class="text-red-500"><i class="fa-solid fa-trash"></i> Delete</button>
-        </form>
-      </div>
     </div>
 </div>
 </x-layout>
